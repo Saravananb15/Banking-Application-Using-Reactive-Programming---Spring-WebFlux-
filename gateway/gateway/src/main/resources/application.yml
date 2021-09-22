@@ -1,0 +1,23 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka 
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+      - id: BankAccount
+        uri: http://localhost:8080/home
+        predicates:
+        - Path=/**
+      - id: LOAN
+        uri: http://localhost:8081/loanservice
+        predicates:
+        - Path=/loanservice/**
+      - id: updateAccount
+        uri: http://localhost:8082/updateAccount
+        predicates:
+        - Path=/**
